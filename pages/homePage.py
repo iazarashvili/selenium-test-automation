@@ -1,14 +1,14 @@
-from selenium.webdriver.common.by import By
+from base.base_page import BasePage
+from config.url import Urls
+from selenium.webdriver.support import expected_conditions as ec
 
 
-class HomePage:
+class HomePage(BasePage):
+    PAGE_URL = Urls.HOST
 
-    def __init__(self, browser):
-        self.browser = browser
-
-    def open(self):
-        self.browser.get('https://extra.ge/')
+    sign_in_button = ('xpath', '//button/span[text()="შესვლა"]')
 
     def click_sign_in_button(self):
-        sign_in_btn = self.browser.find_element(By.XPATH, '//button/span[text()="შესვლა"]')
-        sign_in_btn.click()
+        self.wait.until(ec.element_to_be_clickable(self.sign_in_button)).click()
+
+
